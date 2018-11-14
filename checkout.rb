@@ -10,6 +10,6 @@ class Checkout
   end
 
   def total
-    @items.map { |item| item[:price] }.inject(:+) || 0
+    @items.map(&:price).inject(:+) || 0
   end
 end

@@ -2,13 +2,14 @@
 
 require 'test/unit'
 require './checkout'
+require './item'
 
 class TestCheckout < Test::Unit::TestCase
   def setup
     @checkout = Checkout.new
-    @green_tea = { product_code: 'gr1', name: 'Green tea', price: 3.11 }
-    @strawberries = { product_code: 'sr1', name: 'Strawberries', price: 5 }
-    @coffee = { product_code: 'cf1', name: 'Coffee', price: 11.23 }
+    @green_tea = Item.new(product_code: 'gr1', name: 'Green tea', price: 3.11)
+    @strawberries = Item.new(product_code: 'sr1', name: 'Strawberries', price: 5)
+    @coffee = Item.new(product_code: 'cf1', name: 'Coffee', price: 11.23)
   end
 
   def test_scan_item
@@ -22,8 +23,8 @@ class TestCheckout < Test::Unit::TestCase
 
   def test_total_count
     @checkout.scan(@green_tea)
-    assert_equal @checkout.total, @green_tea[:price]
+    assert_equal @checkout.total, @green_tea.price
     @checkout.scan(@strawberries)
-    assert_equal @checkout.total, @green_tea[:price] + @strawberries[:price]
+    assert_equal @checkout.total, @green_tea.price + @strawberries.price
   end
 end
