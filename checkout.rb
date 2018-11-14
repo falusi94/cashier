@@ -8,4 +8,8 @@ class Checkout
   def scan(item)
     @items.push item
   end
+
+  def total
+    0
+  end
 end

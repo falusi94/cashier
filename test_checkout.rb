@@ -13,4 +13,8 @@ class TestCheckout < Test::Unit::TestCase
     items = @checkout.scan(item)
     assert_equal items.count, 1
   end
+
+  def test_total_count_for_empty_cart
+    assert_equal @checkout.total, 0
+  end
 end
