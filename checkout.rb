@@ -3,9 +3,9 @@
 class Checkout
   attr_accessor :discounts
 
-  def initialize
+  def initialize(discounts = [])
     @items = []
-    @discounts = []
+    @discounts = discounts
   end
 
   def scan(item)
