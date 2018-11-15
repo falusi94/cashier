@@ -13,6 +13,7 @@ class Discount
   def apply(items, sum)
     return buy_one_get_one_free(items, sum) if type == :buy_one_get_one_free
     return price_discount_after_n(items, sum) if type == :price_discount_after_n
+    return price_drop_after_n(items, sum) if type == :price_drop_after_n
 
     sum
   end
@@ -29,5 +30,13 @@ class Discount
     return sum if item_count < @data[:after]
 
     sum - item_count * @data[:price_discount]
+  end
+
+  def price_drop_after_n(items, sum)
+    item_count = items.count(@item)
+    return sum if item_count < @data[:after]
+
+    sum -= item_count * @data[:price_drop] * @item.price
+    sum.round 2
   end
 end

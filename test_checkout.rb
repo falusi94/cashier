@@ -43,4 +43,12 @@ class TestCheckout < Test::Unit::TestCase
     3.times { @checkout.scan(@strawberries) }
     assert_equal @checkout.total, @strawberries.price * 3 - 1.5
   end
+
+  def test_price_drop_after_three_strawberries
+    discount = Discount.new(@coffee, 'Price drop after three coffees',
+                            :price_drop_after_n, price_drop: 1.0 / 3, after: 3)
+    @checkout.discount = discount
+    3.times { @checkout.scan(@coffee) }
+    assert_equal @checkout.total, @coffee.price * 2
+  end
 end
