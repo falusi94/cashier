@@ -30,9 +30,17 @@ class TestCheckout < Test::Unit::TestCase
   end
 
   def test_buy_one_get_one_free_tea
-    discount = Discount.new(@green_tea, 'Buy-one-get-one-free green tea')
+    discount = Discount.new(@green_tea, 'Buy-one-get-one-free green tea', :buy_one_get_one_free)
     @checkout.discount = discount
     2.times { @checkout.scan(@green_tea) }
     assert_equal @checkout.total, @green_tea.price
+  end
+
+  def test_price_discount_after_three_strawberries
+    discount = Discount.new(@strawberries, 'Price discount after three strawberries',
+                            :price_discount_after_n, price_discount: 0.5, after: 3)
+    @checkout.discount = discount
+    3.times { @checkout.scan(@strawberries) }
+    assert_equal @checkout.total, @strawberries.price * 3 - 1.5
   end
 end
