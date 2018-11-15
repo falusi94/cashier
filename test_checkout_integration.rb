@@ -28,4 +28,27 @@ class TestCheckoutIntegration < Test::Unit::TestCase
     @checkout.scan(@coffee)
     assert_equal 22.45, @checkout.total
   end
+
+  def test_case_2
+    @checkout.scan(@green_tea)
+    @checkout.scan(@green_tea)
+    assert_equal 3.11, @checkout.total
+  end
+
+  def test_case_3
+    @checkout.scan(@strawberries)
+    @checkout.scan(@strawberries)
+    @checkout.scan(@green_tea)
+    @checkout.scan(@strawberries)
+    assert_equal 16.61, @checkout.total
+  end
+
+  def test_case_4
+    @checkout.scan(@green_tea)
+    @checkout.scan(@coffee)
+    @checkout.scan(@strawberries)
+    @checkout.scan(@coffee)
+    @checkout.scan(@coffee)
+    assert_equal 30.57, @checkout.total
+  end
 end
