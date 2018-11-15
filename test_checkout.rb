@@ -3,6 +3,7 @@
 require 'test/unit'
 require './checkout'
 require './item'
+require './discount'
 
 class TestCheckout < Test::Unit::TestCase
   def setup
@@ -26,5 +27,12 @@ class TestCheckout < Test::Unit::TestCase
     assert_equal @checkout.total, @green_tea.price
     @checkout.scan(@strawberries)
     assert_equal @checkout.total, @green_tea.price + @strawberries.price
+  end
+
+  def test_buy_one_get_one_free_tea
+    discount = Discount.new(@green_tea, 'Buy-one-get-one-free green tea')
+    @checkout.discount = discount
+    2.times { @checkout.scan(@green_tea) }
+    assert_equal @checkout.total, @green_tea.price
   end
 end
