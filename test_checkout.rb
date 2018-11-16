@@ -30,7 +30,8 @@ class TestCheckout < Test::Unit::TestCase
   end
 
   def test_buy_one_get_one_free_tea
-    discount = Discount.new(@green_tea, 'Buy-one-get-one-free green tea', :buy_one_get_one_free)
+    discount = Discount.new(@green_tea, 'Buy-one-get-one-free green tea',
+                            :buy_n_get_one_free, after: 2)
     @checkout.add_discount(discount)
     2.times { @checkout.scan(@green_tea) }
     assert_equal @checkout.total, @green_tea.price

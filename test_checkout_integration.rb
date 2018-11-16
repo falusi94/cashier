@@ -11,7 +11,8 @@ class TestCheckoutIntegration < Test::Unit::TestCase
     @strawberries = Item.new(product_code: 'sr1', name: 'Strawberries', price: 5)
     @coffee = Item.new(product_code: 'cf1', name: 'Coffee', price: 11.23)
     discounts = [
-      Discount.new(@green_tea, 'Buy-one-get-one-free green tea', :buy_one_get_one_free),
+      Discount.new(@green_tea, 'Buy-one-get-one-free green tea',
+                   :buy_n_get_one_free, after: 2),
       Discount.new(@strawberries, 'Price discount after three strawberries',
                    :price_discount_after_n, price_discount: 0.5, after: 3),
       Discount.new(@coffee, 'Price drop after three coffees',
