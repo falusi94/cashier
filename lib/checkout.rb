@@ -17,8 +17,4 @@ class Checkout
     @discounts&.each { |discount| sum = discount.apply(@items, sum) }
     sum
   end
-
-  def add_discount(discount)
-    @discounts.push discount
-  end
 end

@@ -35,7 +35,7 @@ RSpec.describe Checkout do
         green_tea = build(:green_tea)
         discount = Discount.new(green_tea, 'Buy-one-get-one-free green tea',
                                 :buy_n_get_one_free, after: 2)
-        checkout.add_discount(discount)
+        checkout = described_class.new([discount])
 
         2.times { checkout.scan(green_tea) }
 
@@ -48,7 +48,7 @@ RSpec.describe Checkout do
         strawberries = build(:strawberries)
         discount = Discount.new(strawberries, 'Price discount after three strawberries',
                                 :price_discount_after_n, price_discount: 0.5, after: 3)
-        checkout.add_discount(discount)
+        checkout = described_class.new([discount])
 
         3.times { checkout.scan(strawberries) }
 
@@ -61,7 +61,7 @@ RSpec.describe Checkout do
         coffee = build(:coffee)
         discount = Discount.new(coffee, 'Price drop after three coffees',
                                 :price_drop_after_n, price_drop: 1.0 / 3, after: 3)
-        checkout.add_discount(discount)
+        checkout = described_class.new([discount])
 
         3.times { checkout.scan(coffee) }
 
