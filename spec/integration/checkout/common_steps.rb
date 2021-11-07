@@ -8,11 +8,9 @@ steps_for :checkout do
     @strawberries = build(:strawberries)
     @coffee       = build(:coffee)
     pricing_rules = [
-      Pricing::GetOneFreeAfterN.new('Buy-one-get-one-free green tea', green_tea, after_count: 2),
-      Pricing::PriceDiscountAfterN.new('Price discount after three strawberries', strawberries,
-                                       amount_of_discount: 0.5, after_count: 3),
-      Pricing::PriceDropAfterN.new('Price drop after three coffees', coffee,
-                                   discount_multiplier: 1.0 / 3, after_count: 3),
+      build(:get_one_free_after_n_rule, item: green_tea),
+      build(:price_discount_after_n_rule, item: strawberries, amount_of_discount: 0.5, after_count: 3),
+      build(:price_drop_after_n_rule, item: coffee, discount_multiplier: 1.0 / 3, after_count: 3)
     ]
     @checkout = Checkout.new(pricing_rules)
   end
