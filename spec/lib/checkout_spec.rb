@@ -5,10 +5,11 @@ RSpec.describe Checkout do
 
   describe '#scan' do
     it 'saves item' do
-      item  = build(:green_tea)
-      items = checkout.scan(item)
+      item = build(:green_tea)
 
-      expect(items).to include(item)
+      checkout.scan(item)
+
+      expect(checkout.items).to match([item])
     end
   end
 

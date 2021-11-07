@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 class Checkout
-  attr_accessor :discounts
+  attr_reader :pricing_rules, :items
 
-  def initialize(discounts = [])
-    @items = []
-    @discounts = discounts
+  def initialize(pricing_rules = [])
+    @items         = []
+    @pricing_rules = pricing_rules
   end
 
   def scan(item)
-    @items.push item
+    @items.push(item)
   end
 
   def total
-    sum = @items.map(&:price).inject(:+) || 0
-    @discounts&.each { |discount| sum = discount.apply(@items, sum) }
-    sum.round(2)
+    total = items.map(&:price).inject(:+) || 0
+
+    pricing_rules.inject(total) { |sum, rule| rule.apply(items, sum) }.round(2)
   end
 end
