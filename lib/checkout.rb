@@ -15,6 +15,6 @@ class Checkout
   def total
     sum = @items.map(&:price).inject(:+) || 0
     @discounts&.each { |discount| sum = discount.apply(@items, sum) }
-    sum
+    sum.round(2)
   end
 end

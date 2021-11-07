@@ -1,6 +1,6 @@
 Feature: adding items into the cart
   Background:
-    Given a setup with basic items and discounts
+    Given a setup with basic items and pricing rules
 
   @checkout
   Scenario: successful case

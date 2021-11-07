@@ -14,13 +14,21 @@ Create items like this:
 Item.new(product_number: '123', name: 'My item', price: 3.5)
 ```
 
-Create pricing rules described in the following form:
+By default, there are three pricing rules defined:
+
+- `Pricing::GetOneFreeAfterN`
+- `Pricing::PriceDiscountAfterN`
+- `Pricing::PriceDropAfterN`
+
+To add a new one, just inherit the `Discount::BaseDiscount` and define the `#apply` method at least.
 ```ruby
-Discount.new(item, name, type, data)
-# Where type can be one of the following:
-# :price_drop_after_n - need to add :after and :price_drop to data
-# :price_discount_after_n - need to add :after and :price_discount to data
-# :buy_n_get_one_free - need to add :after to data
+module Pricing
+  class NewFancyPricingRule < BasePricingRule
+    def apply(items, total)
+      # do calculations & return reduced price
+    end
+  end
+end
 ```
 
 ## Test products

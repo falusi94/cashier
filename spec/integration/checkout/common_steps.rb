@@ -3,19 +3,18 @@
 steps_for :checkout do
   attr_reader :green_tea, :strawberries, :coffee, :checkout
 
-  step 'a setup with basic items and discounts' do
+  step 'a setup with basic items and pricing rules' do
     @green_tea    = build(:green_tea)
     @strawberries = build(:strawberries)
     @coffee       = build(:coffee)
-    discounts = [
-      Discount.new(@green_tea, 'Buy-one-get-one-free green tea',
-                   :buy_n_get_one_free, after: 2),
-      Discount.new(@strawberries, 'Price discount after three strawberries',
-                   :price_discount_after_n, price_discount: 0.5, after: 3),
-      Discount.new(@coffee, 'Price drop after three coffees',
-                   :price_drop_after_n, price_drop: 1.0 / 3, after: 3)
+    pricing_rules = [
+      Pricing::GetOneFreeAfterN.new('Buy-one-get-one-free green tea', green_tea, after_count: 2),
+      Pricing::PriceDiscountAfterN.new('Price discount after three strawberries', strawberries,
+                                       amount_of_discount: 0.5, after_count: 3),
+      Pricing::PriceDropAfterN.new('Price drop after three coffees', coffee,
+                                   discount_multiplier: 1.0 / 3, after_count: 3),
     ]
-    @checkout = Checkout.new(discounts)
+    @checkout = Checkout.new(pricing_rules)
   end
 
   step 'add green tea into the cart' do
