@@ -1,1 +1,2 @@
+--require turnip/rspec
 --require spec_helper
