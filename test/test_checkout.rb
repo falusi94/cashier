@@ -6,9 +6,9 @@ require_relative '../boot'
 class TestCheckout < Test::Unit::TestCase
   def setup
     @checkout = Checkout.new
-    @green_tea = Item.new(product_code: 'gr1', name: 'Green tea', price: 3.11)
-    @strawberries = Item.new(product_code: 'sr1', name: 'Strawberries', price: 5)
-    @coffee = Item.new(product_code: 'cf1', name: 'Coffee', price: 11.23)
+    @green_tea = Item.new(product_number: 'gr1', name: 'Green tea', price: 3.11)
+    @strawberries = Item.new(product_number: 'sr1', name: 'Strawberries', price: 5)
+    @coffee = Item.new(product_number: 'cf1', name: 'Coffee', price: 11.23)
   end
 
   def test_scan_item
