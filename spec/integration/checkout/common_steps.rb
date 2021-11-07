@@ -4,9 +4,9 @@ steps_for :checkout do
   attr_reader :green_tea, :strawberries, :coffee, :checkout
 
   step 'a setup with basic items and discounts' do
-    @green_tea    = Item.parse(product_number: 'gr1', name: 'Green tea', price: 3.11)
-    @strawberries = Item.parse(product_number: 'sr1', name: 'Strawberries', price: 5)
-    @coffee       = Item.parse(product_number: 'cf1', name: 'Coffee', price: 11.23)
+    @green_tea    = build(:green_tea)
+    @strawberries = build(:strawberries)
+    @coffee       = build(:coffee)
     discounts = [
       Discount.new(@green_tea, 'Buy-one-get-one-free green tea',
                    :buy_n_get_one_free, after: 2),
