@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
-class Item
-  attr_accessor :product_number, :name, :price
-
-  def initialize(data)
-    @product_number = data[:product_number]
-    @name = data[:name]
-    @price = data[:price]
+Item = Struct.new(:product_number, :name, :price) do
+  def self.parse(product_number: nil, name: nil, price: 0)
+    new(product_number, name, price)
   end
 end
