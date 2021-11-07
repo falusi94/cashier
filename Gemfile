@@ -8,6 +8,7 @@ gem 'zeitwerk'
 
 group :test do
   gem 'debug'
+  gem 'factory_bot'
   gem 'rspec'
   gem 'turnip'
 end
