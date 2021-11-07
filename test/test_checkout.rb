@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 require 'test/unit'
-require './checkout'
-require './item'
-require './discount'
+require_relative '../boot'
 
 class TestCheckout < Test::Unit::TestCase
   def setup

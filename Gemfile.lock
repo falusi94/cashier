@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    zeitwerk (2.5.1)
+
+PLATFORMS
+  arm64-darwin-20
+
+DEPENDENCIES
+  zeitwerk
+
+BUNDLED WITH
+   2.2.22
