@@ -2,38 +2,22 @@
 
 FactoryBot.define do
   factory :pricing_rule, class: 'Pricing::BasePricingRule' do
-    initialize_with do
-      class_name
-        .constantize
-        .new(attributes[:name], attributes[:item], **attributes.except(:name, :item))
-    end
+    initialize_with { new(attributes[:name], attributes[:item], **attributes.except(:name, :item)) }
 
     sequence(:name) { |i| "Pricing rule #{i}" }
-
-    transient do
-      class_name { 'Pricing::BasePricingRule' }
-    end
+    item            { nil }
   end
 
-  factory :get_one_free_after_n_rule, parent: :pricing_rule do
-    class_name { 'Pricing::GetOneFreeAfterN' }
-
-    item        { nil }
+  factory :get_one_free_after_n_rule, parent: :pricing_rule, class: 'Pricing::GetOneFreeAfterN' do
     after_count { 2 }
   end
 
-  factory :price_discount_after_n_rule, parent: :pricing_rule do
-    class_name { 'Pricing::PriceDiscountAfterN' }
-
-    item               { nil }
+  factory :price_discount_after_n_rule, parent: :pricing_rule, class: 'Pricing::PriceDiscountAfterN' do
     after_count        { 2 }
     amount_of_discount { 1 }
   end
 
-  factory :price_drop_after_n_rule, parent: :pricing_rule do
-    class_name { 'Pricing::PriceDropAfterN' }
-
-    item                { nil }
+  factory :price_drop_after_n_rule, parent: :pricing_rule, class: 'Pricing::PriceDropAfterN' do
     after_count         { 2 }
     discount_multiplier { 0.5 }
   end
